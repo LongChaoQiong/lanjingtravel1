@@ -1,0 +1,16 @@
+server:
+    port: 8084
+    servlet:
+          context-path: /trade
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/ljydb?characterEncoding=utf-8
+        username: root
+        password:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+# mybatis配置
+mybatis:
+    mapper-locations: classpath:org/lanqiao/mapper/*.xml # mapper映射文件位置
+    type-aliases-package: org.lanqiao.beans..* # 实体类所在的位置
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #用于控制台打印sql语句

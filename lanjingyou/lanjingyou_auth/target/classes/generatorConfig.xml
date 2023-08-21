@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- targetRuntime=“MyBatis3“ 可以生成带条件的增删改查 -->
+    <!-- targetRuntime=“MyBatis3Simple“ 可以生成基本的增删改查,默认是这个-->
+    <context id="DB2Tables" targetRuntime="MyBatis3Simple">
+
+        <commentGenerator>
+            <!--去除所有的注释-->
+            <!--<property name="suppressAllComments" value="true" />-->
+            <!--禁止注释中出现文件创建时间-->
+            <property name="suppressDate" value="true" />
+            <!--将数据库表中各个列的 comment 字段作为 JavaBean 中域的注释-->
+            <property name="addRemarkComments" value="true" />
+        </commentGenerator>
+
+        <!--配置连接数据库的参数-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/ljydb?useSSL=false"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+
+        <!-- 定义生成 JavaBean 的各种要求，targetPackage 是存放 JavaBean 的包名，
+        targetProject 是项目名称及 src 路径 -->
+        <javaModelGenerator targetPackage="org.lanqiao.beans.pojo"
+                            targetProject="/home/project/lanjingyou/beans/src/main/java">
+        </javaModelGenerator>
+
+        <!-- 定义生成 SQL 映射文件的各种要求，targetPackage 是存放 JavaBean 的包名，
+        targetProject 是项目名称及 src 路径 -->
+        <sqlMapGenerator targetPackage="org.lanqiao.mapper"  targetProject="/home/project/lanjingyou/dao/src/main/resources">
+        </sqlMapGenerator>
+
+        <!-- 定义与 SQL 映射文件对应接口文件的各种要求，targetPackage 是存放 JavaBean 的包名，
+        targetProject 是项目名称及 src 路径，type 指定接口文件是哪些文件的客户端 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="org.lanqiao.mapper"
+                             targetProject="/home/project/lanjingyou/dao/src/main/java">
+        </javaClientGenerator>
+
+        <!-- 五、table 指定每个表的生成策略 -->
+        <!--配置要逆向解析的数据表，tableName 对应表名，domainObjectName 对应 javaBean 名
+        -->  
+        <table domainObjectName="LjyUserLinkUser" tableName="ljy_user_link_user"></table>
+        <table domainObjectName="LjyComment" tableName="ljy_comment"></table>
+        <table domainObjectName="LjyHotel" tableName="ljy_hotel">
+            <!-- 解决text 转成 Blobs 问题 -->
+            <columnOverride column="details" javaType="java.lang.String" jdbcType="VARCHAR" />  
+            <columnOverride column="facilities" javaType="java.lang.String" jdbcType="VARCHAR" />  
+            <columnOverride column="hotelPolicy" javaType="java.lang.String" jdbcType="VARCHAR" />  
+        </table>
+        <table domainObjectName="LjyAreaDic" tableName="ljy_area_dic"></table>
+        <table domainObjectName="LjyHotelExtendProperty" tableName="ljy_hotel_extend_property"></table>
+        <table domainObjectName="LjyHotelFeature" tableName="ljy_hotel_feature"></table>
+        <table domainObjectName="LjyLabelDic" tableName="ljy_label_dic"></table>
+        <table domainObjectName="LjyHotelOrder" tableName="ljy_hotel_order"></table>
+        <table domainObjectName="LjyHotelRoom" tableName="ljy_hotel_room"></table>
+        <table domainObjectName="LjyHotelTempStore" tableName="ljy_hotel_temp_store"></table>
+        <table domainObjectName="LjyHotelTradingArea" tableName="ljy_hotel_trading_area"></table>
+        <table domainObjectName="LjyImage" tableName="ljy_image"></table>
+        <table domainObjectName="LjyUser" tableName="ljy_user"></table>
+        <table domainObjectName="LjyTradeEnds" tableName="ljy_trade_ends"></table>
+        <table domainObjectName="LjyProductStore" tableName="ljy_product_store"></table>
+        <table domainObjectName="LjyOrderLinkUser" tableName="ljy_order_link_user"></table>
+        <table domainObjectName="LjyUserInfo" tableName="ljy_user_info"></table>
+    </context>
+</generatorConfiguration>
